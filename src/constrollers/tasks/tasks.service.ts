@@ -11,30 +11,42 @@ export class TasksService {
     };
 
     async getAll(): Promise<any> {
-        const response = await axios.get(`${this.apiWeb}/tasks`, {
-            headers: this.headers
-        });
-        console.log(response.data);
-        return response.data;
+        try {
+            const response = await axios.get(`${this.apiWeb}/tasks`, {
+                headers: this.headers
+            });
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            throw new NotFoundException(error);
+        }
     }
 
     async getById(id: any): Promise<any> {
-        const response = await axios.get(`${this.apiWeb}/tasks/${id}`, {
-            headers: this.headers
-        });
-        console.log(response.data);
-        return response.data;
+        try {
+            const response = await axios.get(`${this.apiWeb}/tasks/${id}`, {
+                headers: this.headers
+            });
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            throw new NotFoundException(error);
+        }
     }
 
     async create(payload:  any): Promise<any> {
-        const response = await axios.post(`${this.apiWeb}/tasks`, payload, {
-            headers: {
-                ...this.headers,
-                'Content-Type': 'application/json'
-            },
-        })
-        console.log(response.data);
-        return response.data;
+        try {
+            const response = await axios.post(`${this.apiWeb}/tasks`, payload, {
+                headers: {
+                    ...this.headers,
+                    'Content-Type': 'application/json'
+                },
+            })
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            throw new NotFoundException(error);
+        }
     }
 
     async update(id:any, payload: any): Promise<any> {

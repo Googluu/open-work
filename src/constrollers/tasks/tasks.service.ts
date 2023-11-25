@@ -28,14 +28,19 @@ export class TasksService {
     }
 
     async create(payload:  any): Promise<any> {
-        const response = await axios.post(`${this.apiWeb}/tasks`, payload, {headers: this.headers,})
+        const response = await axios.post(`${this.apiWeb}/tasks`, payload, {
+            headers: {
+                ...this.headers,
+                'Content-Type': 'application/json'
+            },
+        })
         console.log(response.data);
         return response.data;
     }
 
     async update(id:any, payload: any): Promise<any> {
         try {
-            const response = await axios.put(`${this.apiWeb}/tasks/${id}`, payload, {
+            const response = await axios.post(`${this.apiWeb}/tasks/${id}`, payload, {
                 headers: {
                     ...this.headers,
                     'Content-Type': 'application/json'

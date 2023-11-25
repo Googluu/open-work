@@ -1,12 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import axios from 'axios';
 
-// import { CreateTaskDto } from './tasks.dto';
-
+import { config } from 'src/config';
 @Injectable()
 export class TasksService {
     private apiWeb = 'https://api.todoist.com/rest/v2';
-    private token = '6f665e8f59e9fe2aab49ea42859b47b2b9a577b0';
+    private token = config.token;
     private headers = {
         'Authorization': `Bearer ${this.token}`
     };

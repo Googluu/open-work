@@ -17,10 +17,10 @@ export class TasksController {
         return this.tasksService.getById(id);
     }
 
-    // @Post()
-    // create(@Body() payload: CreateTaskDto) {
-    //     return this.tasksService.create(payload);
-    // }
+    @Post()
+    create(@Body() payload: any) {
+        return this.tasksService.create(payload);
+    }
 
     @Delete(':id')
     remove(@Param('id') id: string) {

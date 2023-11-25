@@ -22,8 +22,8 @@ export class TasksController {
     //     return this.tasksService.create(payload);
     // }
 
-    @Delete()
-    remove(@Param() id: string) {
-       return `Tarea #${this.tasksService.remove(id)} eliminada`;
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+       return this.tasksService.remove(id);
     }
 }

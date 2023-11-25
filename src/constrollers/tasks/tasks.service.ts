@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import axios from 'axios';
 
 import { CreateTaskDto } from './tasks.dto';
@@ -38,12 +38,14 @@ export class TasksService {
     // }
 
     async remove(id: any): Promise<any> {
-        const response = await axios.delete(`${this.apiWeb}/tasks/${id}`, {
-          headers: this.headers  
-        });
-
-        return {
-            status: 204
+        try {
+            // Realiza la eliminación directamente sin verificar previamente
+            await axios.delete(`${this.apiWeb}/tasks/${id}`, { headers: this.headers });
+            return true;
+        } catch (error) {
+            // Maneja el error en caso de que la tarea no exista o haya otros problemas
+            throw new NotFoundException(`Task #${id} not found or could not be deleted`);
         }
     }
+    
 }

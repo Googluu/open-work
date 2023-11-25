@@ -22,6 +22,11 @@ export class TasksController {
         return this.tasksService.create(payload);
     }
 
+    @Put(':id')
+    update(@Param('id') id: string, @Body() payload: any) {
+        return this.tasksService.update(id, payload);
+    }
+
     @Delete(':id')
     remove(@Param('id') id: string) {
        return this.tasksService.remove(id);

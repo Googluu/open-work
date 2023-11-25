@@ -33,6 +33,21 @@ export class TasksService {
         return response.data;
     }
 
+    async update(id:any, payload: any): Promise<any> {
+        try {
+            const response = await axios.put(`${this.apiWeb}/tasks/${id}`, payload, {
+                headers: {
+                    ...this.headers,
+                    'Content-Type': 'application/json'
+                },
+            })
+            console.log(response);
+            return response.data;
+        } catch (error) {
+            throw new NotFoundException(error);
+        }
+    }
+
     async remove(id: any): Promise<any> {
         try {
             await axios.delete(`${this.apiWeb}/tasks/${id}`, { headers: this.headers });
